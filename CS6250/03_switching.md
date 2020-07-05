@@ -54,3 +54,40 @@ longer needs to perform a flood.
 | Destination | Port |
 |-------------|------|
 | A           | 1    |
+
+### Spanning Tree
+
+Flooding has one issues. If the network topology is a cyclic graph, the flooding can become an
+infinite loop of frame forwarding.
+
+> A spanning tree is a subst of graph G, which has all the vertices covered with minimum possible
+  number of edges. Hence, a spanning tree does not have cycles and it cannot be disconnected.
+
+In order to address this problem, the network needs to be constructed as a spanning tree. Each node
+would only broadcast to the links that belong to the spanning tree (excluding the link which
+it receives the frame from.) 
+
+The switches within the network need to perform the following steps,
+
+1. Elect a root (of the tree) by selecting the switch with smallest ID.
+2. Each switch excludes link if it is not a shortest path to root.
+
+Initially, every node thinks it is the root. As time progresses, each node updates its view of the
+root and compute distance to the new root. In order to execute this protocol, the switches/nodes
+just need to broadcast a payload indicating, `claimed_root`, `distance` and `origin_root`. Each node
+can carry out logic to determine who's the real root and which link provides the shortest distance
+to the root.
+
+![Spanning Tree Protocol](https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Spanning_tree_protocol_at_work_5.svg/1280px-Spanning_tree_protocol_at_work_5.svg.png)
+
+## Switch vs Router
+
+Switches are on layer 2 with eternet cables. 
+
+- It is capable of auto-configuring, like the example above
+- Forwarding tends to be fast
+
+Routers are on layer 3 with IP.
+
+- Not restricted to spanning tree, a single packet could be sent along one of multiple possible
+  paths in the underlying router level.
