@@ -136,3 +136,5 @@ Supose we have Alice and Bob, Alice wants to send an email to Bob.
 5. At Bob's mail server, the server side of SMTP receives the message. Bob's mail server then places
   the message in Bob's mailbox.
 6. Bob invokes his user agent to read the message his convenience.
+
+![SMTP](./diagrams/smtp.png)
