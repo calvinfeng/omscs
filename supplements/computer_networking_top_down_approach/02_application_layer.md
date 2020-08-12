@@ -104,6 +104,3 @@ Supose we have Alice and Bob, Alice wants to send an email to Bob.
 
 HTTP is mainly a pull protocol. SMTP is primarily a push protocol. SMTP requires each message,
 including the body of each message, to be in 7-bit ASCII format.
-
-## TCP
-
