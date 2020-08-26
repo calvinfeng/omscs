@@ -1,4 +1,4 @@
-# Transport Layer 
+# Transport Layer
 
 ## Transport vs Network Layers
 
@@ -15,6 +15,21 @@ Transport layer lies above the network layer in the protocol stack. Whereas a tr
 protocol provides logical communication between **processes** running on different hosts, a network
 layer protocol provides logical communication between **hosts**.
 
+Common applications and their underlying transport protocols.
+
+| Application | Application-Layer Protocol | Transport Protocol |
+|-------------|----------------------------|--------------------|
+| Electronic Mail | SMTP | TCP |
+| Remote Terminal Access | Telnet | TCP |
+| Web | HTTP | TCP |
+| File Transfer | FTP | TCP |
+| Remote File Server | NFS | UDP |
+| Streaming Multimedia | typically proprietary | UDP or TCP |
+| Internet Telephony | typically proprietary | UDP or TCP |
+| Network Management | SNMP | UDP |
+| Routing Protocol | RIP | UDP |
+| Name Translation | DNS | UDP |
+
 ## Multiplexing vs Demultiplexing
 
 Process can have one or more sockets, doors through which data passes from network to the process
@@ -27,11 +42,28 @@ passing the segments to the network layer is called **multiplexing**.
 
 ## UDP
 
-Todo
+UDP, defined in RFC 768, does just about as little as a transport protocol can do. Aside from the
+multiplexing/demultiplexing function and some light error checking, it adds nothing to IP. In fact,
+if the application developer chooses UDP instead of TCP, then the application is almost directly
+talking with IP.
 
-## Principles of Reliable Data Transfer
+UDP takes messasges from the application process, attaches source and destination port number fields
+for the multiplexing/demultiplexing service, adds two other fields, and passes the resulting
+segment to the network layer.
 
-Todo
+The network layer encapsulates the transport-layer segment into an IP datagram and then makes a best
+effort attempt to deliver the segment to the receiving host.
+
+UDP does not perform handshake, thus it is said to be connectionless.
+
+![UDP](https://media.geeksforgeeks.org/wp-content/uploads/UDP-header.png)
+
+Although it is unreliable data transfer, there are couple benefits to UDP.
+
+- Finer application-level control over what data is sent and when is sent.
+- No connection needed, therefore no delay introduced.
+- No connection state, less memory footprint, thus supporting more clients at once.
+- Small packet header overhead. It's 8 bytes UDP segment vs 20 bytes TCP segment.
 
 ## TCP
 
